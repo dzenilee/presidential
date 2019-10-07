@@ -71,6 +71,15 @@ class Featurizer:
         scores.append(textstat.gunning_fog(text))
         return np.mean(scores)
 
+    # @staticmethod
+    # def get_n_subordinate_phrases(text):
+    #     subordinate_phrases = get_phrases(doc, "SP")
+    #     return len(subordinate_phrases)
+
+    @staticmethod
+    def get_n_opponent_mentions(text, opponent_name="Trump"):
+        return text.count(opponent_name)
+
     @staticmethod
     def get_n_words_before_main_verb(text):
         total = 0
@@ -82,39 +91,31 @@ class Featurizer:
                 total += dist_to_init
         return total
 
-    # @staticmethod
-    # def get_n_subordinate_phrases(text):
-    #     subordinate_phrases = get_phrases(doc, "SP")
-    #     return len(subordinate_phrases)
-
-    @staticmethod
-    def get_n_opponent_mentions(text, opponent_name="Trump"):
-        return text.count(opponent_name)
-
     @staticmethod
     def get_sent_length_stats(text):
-        sent_lengths = []
+        word_count_per_sent = []
         doc = nlp(text)
         for sent in doc.sents:
-            sent_lengths.append(len(sent.text))
-        sent_length_stats_dict = {}
-        sent_length_stats_dict.update({"length": len(text)})
-        sent_length_stats_dict.update({"avg": np.average(sent_lengths)})
-        sent_length_stats_dict.update({"sd": np.std(sent_lengths)})
-        return sent_length_stats_dict
+            word_count_per_sent.append(len(sent.text.split()))
+        sent_length_dict = {}
+        sent_length_dict["n_words"] = len(text.split())
+        sent_length_dict["n_sents"] = len(doc.sents)
+        sent_length_dict["mean_sent_length"] = np.mean(word_count_per_sent)
+        sent_length_dict["std_sent_length"] = np.std(word_count_per_sent)
+        return sent_length_dict
 
     @staticmethod
     def get_spacy_vector(text):
-        vector = 0
+        # vector = 0
         doc = nlp(text)
-        for tok in doc:
-            vector += tok.vector
-        return vector
+        # for tok in doc:
+        #     vector += tok.vector
+        return doc.vector
 
     def featurize(self, text):
         pronoun_count_dict = self.count_pronouns(text)
         sent_length_stats = self.get_sent_length_stats(text)
-        # vector = self.get_spacy_vector(text)
+        vector = self.get_spacy_vector(text)
 
         # Add manual features.
         feature_dict = {
