@@ -2,16 +2,17 @@ import numpy as np
 import re
 import spacy
 import textstat
-from presidential.preprocess import debate_df
+
 from lexicalrichness import LexicalRichness
+
+from presidential.preprocess import debate_df
+
 
 nlp = spacy.load("en_core_web_md")
 
 segments = debate_df.segment
 
 df = debate_df
-df["segment_length"] = debate_df.segment.str.len()
-
 
 first_singular = ["i", "my", "mine", "myself"]
 first_plural = ["we", "our", "ours", "ourselves"]
@@ -99,7 +100,7 @@ class Featurizer:
             word_count_per_sent.append(len(sent.text.split()))
         sent_length_dict = {}
         sent_length_dict["n_words"] = len(text.split())
-        sent_length_dict["n_sents"] = len(doc.sents)
+        sent_length_dict["n_sents"] = len(list(doc.sents))
         sent_length_dict["mean_sent_length"] = np.mean(word_count_per_sent)
         sent_length_dict["std_sent_length"] = np.std(word_count_per_sent)
         return sent_length_dict

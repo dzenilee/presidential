@@ -1,0 +1,2 @@
+lexicalrichness==0.1.3
+spacy==2.2.1

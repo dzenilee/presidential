@@ -1,11 +1,11 @@
 import spacy
 import pandas as pd
 
-from presidential import PRESIDENTIAL_DIR
+from presidential.utils import DATA_DIR
 from presidential.preprocess import debate_df
 from presidential.features import Featurizer
 
-DATA_DIR = PRESIDENTIAL_DIR / "data"
+
 nlp = spacy.load("en_core_web_md")
 f = Featurizer()
 df = debate_df
@@ -32,6 +32,11 @@ n_1pl = [d.get("1pl") for d in pronoun_df.segment]
 n_2 = [d.get("2") for d in pronoun_df.segment]
 n_3 = [d.get("3") for d in pronoun_df.segment]
 
+n_words = [d.get("n_words") for d in sent_length_df.segment]
+n_sents = [d.get("n_sents") for d in sent_length_df.segment]
+mean_sent_length = [d.get("mean_sent_length") for d in sent_length_df.segment]
+std_sent_length = [d.get("std_sent_length") for d in sent_length_df.segment]
+
 # add new series to col_dict
 col_dict["mtld"] = mtld
 col_dict["n_difficult_words"] = n_difficult_words
@@ -42,6 +47,10 @@ col_dict["person_1sg"] = n_1sg
 col_dict["person_1pl"] = n_1pl
 col_dict["person_2"] = n_2
 col_dict["person_3"] = n_3
+col_dict["n_words"] = n_words
+col_dict["n_sents"] = n_sents
+col_dict["mean_sent_length"] = mean_sent_length
+col_dict["std_sent_length"] = std_sent_length
 
 # add new columns
 for k, v in col_dict.items():
@@ -52,4 +61,6 @@ df.head()
 
 if __name__ == "__main__":
     print(df.columns)
-    df.to_csv(DATA_DIR / "new_df.csv")
+    filename = "new_df2.csv"
+    df.to_csv(DATA_DIR / filename)
+    print(f"Wrote the dataframe to {filename}.")
