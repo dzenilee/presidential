@@ -5,7 +5,8 @@ import textstat
 
 from lexicalrichness import LexicalRichness
 
-from presidential.preprocess import debate_df
+from presidential.preprocess import debate_df, DEM_CANDIDATES, REP_CANDIDATES
+CANDIDATES = set(DEM_CANDIDATES + REP_CANDIDATES)
 
 
 nlp = spacy.load("en_core_web_md")
@@ -63,23 +64,8 @@ class Featurizer:
             return LexicalRichness(text).mtld(threshold=0.72)
 
     @staticmethod
-    def get_readability_score(text):
-        text = text
-        scores = []
-        scores.append(textstat.automated_readability_index(text))
-        scores.append(textstat.coleman_liau_index(text))
-        scores.append(textstat.flesch_kincaid_grade(text))
-        scores.append(textstat.gunning_fog(text))
-        return np.mean(scores)
-
-    # @staticmethod
-    # def get_n_subordinate_phrases(text):
-    #     subordinate_phrases = get_phrases(doc, "SP")
-    #     return len(subordinate_phrases)
-
-    @staticmethod
-    def get_n_opponent_mentions(text, opponent_name="Trump"):
-        return text.count(opponent_name)
+    def get_n_opponent_mentions(text):
+        return sum(text.count(c) for c in CANDIDATES)
 
     @staticmethod
     def get_n_words_before_main_verb(text):
@@ -91,6 +77,16 @@ class Featurizer:
                 dist_to_init = main.i - sent[0].i
                 total += dist_to_init
         return total
+
+    @staticmethod
+    def get_readability_score(text):
+        text = text
+        scores = []
+        scores.append(textstat.automated_readability_index(text))
+        scores.append(textstat.coleman_liau_index(text))
+        scores.append(textstat.flesch_kincaid_grade(text))
+        scores.append(textstat.gunning_fog(text))
+        return np.mean(scores)
 
     @staticmethod
     def get_sent_length_stats(text):
@@ -113,27 +109,27 @@ class Featurizer:
         #     vector += tok.vector
         return doc.vector
 
-    def featurize(self, text):
-        pronoun_count_dict = self.count_pronouns(text)
-        sent_length_stats = self.get_sent_length_stats(text)
-        vector = self.get_spacy_vector(text)
-
-        # Add manual features.
-        feature_dict = {
-            "mtld": self.get_mtld(text),
-            "n_difficult_words": self.get_difficult_words_count(text),
-            "n_words_before_main_verb": self.get_n_words_before_main_verb(text),
-            "person_1sg": pronoun_count_dict["1sg"],
-            "person_1pl": pronoun_count_dict["1pl"],
-            "person_2": pronoun_count_dict["2"],
-            "person_3": pronoun_count_dict["3"],
-            "readability_score": self.get_readability_score(text),
-            "sent_length": sent_length_stats["length"],
-            "sent_length_average": sent_length_stats["avg"],
-            "sent_length_sd": sent_length_stats["sd"],
-        }
-
-        # add vector embeddings
-        # for i, dim in enumerate(vector):
-        #     feature_dict.update({f"dim_{str(i)}": dim})
-        return feature_dict
+    # def featurize(self, text):
+    #     pronoun_count_dict = self.count_pronouns(text)
+    #     sent_length_stats = self.get_sent_length_stats(text)
+    #     vector = self.get_spacy_vector(text)
+    #
+    #     # Add manual features.
+    #     feature_dict = {
+    #         "mtld": self.get_mtld(text),
+    #         "n_difficult_words": self.get_difficult_words_count(text),
+    #         "n_words_before_main_verb": self.get_n_words_before_main_verb(text),
+    #         "person_1sg": pronoun_count_dict["1sg"],
+    #         "person_1pl": pronoun_count_dict["1pl"],
+    #         "person_2": pronoun_count_dict["2"],
+    #         "person_3": pronoun_count_dict["3"],
+    #         "readability_score": self.get_readability_score(text),
+    #         "sent_length": sent_length_stats["length"],
+    #         "sent_length_average": sent_length_stats["avg"],
+    #         "sent_length_sd": sent_length_stats["sd"],
+    #     }
+    #
+    #     # add vector embeddings
+    #     # for i, dim in enumerate(vector):
+    #     #     feature_dict.update({f"dim_{str(i)}": dim})
+    #     return feature_dict

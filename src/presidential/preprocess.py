@@ -4,8 +4,9 @@ from presidential.utils import DATA_DIR
 pathlist = DATA_DIR.glob("*.txt")
 
 DEP_MODERATORS = [
-    "Cooper",
     "Bash",
+    "Cooper",
+    "Cuomo",
     "Lemon",
     "Lopez",
     "Raddatz",
@@ -18,30 +19,49 @@ DEP_MODERATORS = [
     "Holt",
     "Mitchell",
     "Ifill",
-    "Woodruff",
     "Ramos",
     "Salinas",
-    "Tumulty" "Todd",
+    "Todd",
+    "Tumulty",
     "Maddow",
-    "Cuomo",
+    "Woodruff",
 ]
-
-
-OTHER = ["Unknown", "Unidentified"]
-REP_MODERATORS = ["Muir", "Raddatz", "Kelly", "Wallace", "Baier"]
+REP_MODERATORS = [
+    "Arrarás",
+    "Baier",
+    "Bartiromo",
+    "Bash",
+    "Blitzer",
+    "Cavuto",
+    "Dickerson",
+    "Dinan",
+    "Garrett",
+    "Hewitt",
+    "Kelly",
+    "Muir",
+    "Raddatz",
+    "Tapper",
+    "Wallace",
+    "Strassel",
+]
 DEM_CANDIDATES = ["Chafee", "Clinton", "O'Malley", "Sanders", "Webb"]
 REP_CANDIDATES = [
     "Bush",
     "Carson",
     "Christie",
     "Cruz",
+    "Fiorina",
+    "Huckabee",
     "Kasich",
+    "Paul",
     "Rubio",
     "Trump",
-    "Huckabee",
     "Walker",
-    "Paul",
 ]
+OTHER = ["Unknown", "Unidentified", "Unidentifiable"]
+ALL_SPEAKERS = set(
+    DEP_MODERATORS + DEM_CANDIDATES + REP_MODERATORS + REP_CANDIDATES + OTHER
+)
 
 
 def get_data(transcript_dir=DATA_DIR):
@@ -50,15 +70,14 @@ def get_data(transcript_dir=DATA_DIR):
     labels = []
     debate = []
     for path in pathlist:
-        print(path)
         with open(path, "r") as f:
             for line in f:
                 if not line:
                     continue
-                for name in set(DEP_MODERATORS + DEM_CANDIDATES + OTHER):
+                for name in ALL_SPEAKERS:
                     if name.upper() in line:
                         label = name.lower()
-                for name in set(REP_MODERATORS + REP_CANDIDATES + OTHER):
+                for name in ALL_SPEAKERS:
                     if name.upper() in line:
                         label = name.lower()
                 segments.append(line.replace(f"{label.upper()}: ", ""))
@@ -67,12 +86,13 @@ def get_data(transcript_dir=DATA_DIR):
     return segments, labels, debate
 
 
-segments, labels, debate = get_data(DATA_DIR)
-
-
 def clean_up_segments(segments):
-    return [s.strip() for s in segments]
+    segments = [s.replace("[crosstalk]", "") for s in segments]
+    segments = [s.replace("[applause]", "").strip() for s in segments]
+    return segments
 
+
+segments, labels, debate = get_data(DATA_DIR)
 
 debate_df = pd.DataFrame(
     {"segment": clean_up_segments(segments), "speaker": labels, "debate": debate}

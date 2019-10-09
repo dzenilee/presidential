@@ -18,6 +18,7 @@ n_difficult_words = df.segment.apply(f.get_difficult_words_count)
 n_opponent_mentions = df.segment.apply(f.get_n_opponent_mentions)
 n_words_before_main_verb = df.segment.apply(f.get_n_words_before_main_verb)
 readability = df.segment.apply(f.get_readability_score)
+segment_length = df.segment.str.len()
 
 # dictionaries
 pronoun_counts_dict = df.segment.apply(f.count_pronouns)
@@ -51,12 +52,13 @@ col_dict["n_words"] = n_words
 col_dict["n_sents"] = n_sents
 col_dict["mean_sent_length"] = mean_sent_length
 col_dict["std_sent_length"] = std_sent_length
+col_dict["segment_length"] = segment_length
 
-# add new columns
+# add new columns to the new df
 for k, v in col_dict.items():
     df[k] = v
 
-df.head()
+print(df.head())
 
 
 if __name__ == "__main__":
