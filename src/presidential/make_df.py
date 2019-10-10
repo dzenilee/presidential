@@ -12,7 +12,7 @@ df = debate_df
 
 col_dict = {}
 
-# type: pandas.core.series.Series
+# create new series to add to df
 mtld = df.segment.apply(f.get_mtld)
 n_difficult_words = df.segment.apply(f.get_difficult_words_count)
 n_opponent_mentions = df.segment.apply(f.get_n_opponent_mentions)
@@ -63,6 +63,6 @@ print(df.head())
 
 if __name__ == "__main__":
     print(df.columns)
-    filename = "new_df2.csv"
-    df.to_csv(DATA_DIR / filename)
+    filename = "new_df4.csv"
+    df.to_csv(DATA_DIR / filename, index=False)
     print(f"Wrote the dataframe to {filename}.")

@@ -94,6 +94,7 @@ def clean_up_segments(segments):
 
 segments, labels, debate = get_data(DATA_DIR)
 
-debate_df = pd.DataFrame(
+df = pd.DataFrame(
     {"segment": clean_up_segments(segments), "speaker": labels, "debate": debate}
 )
+debate_df = df.dropna(subset=["segment"])
