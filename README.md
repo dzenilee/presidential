@@ -12,7 +12,7 @@ pip install -r requirements.txt
 * The election’s approaching!
 * Compare candidate speeches in the primary debates of 2015-2016
 * See how much of an outlier Trump was
-* Possibly predict the nominees for 2020
+* A future application: predict the nominees for 2020
 
 ## Data source & preprocessing
 
@@ -21,7 +21,7 @@ American Presidency Project](https://www.presidency.ucsb.edu/documents/president
 
 A transcript excerpt: 
 
-![alt text](images/transcript_excerpt.png)
+![transcript excerpt](images/transcript_excerpt.png)
 
 ### Preprocessing steps
 1. Remove transcriptions of non-verbal utterances like `[laughter]`.
@@ -98,3 +98,26 @@ f.get_n_opponent_mentions(text)  # 3
 ```
 
 ## Analysis
+
+#### Who spoke the most? 
+
+Clinton, Sanders, Trump, Rubio, and Cruz, in that order, spent the most time
+talking in terms of total segment count (total number of paragraphs in the transcripts).
+
+![segment distribution](images/segment_distribution.png)
+
+There are other ways of representing length of speech though.
+
+![length of speech](images/length_of_speech.png)
+
+After normalization:
+
+![length of speech normalized](images/length_of_speech_normalized_table.png)
+
+![length of speech normalized boxplot](images/length_of_speech_normalized_boxplot.png)
+
+Trump spoke significantly less than the other top candidates.
+
+#### Lexical and syntactic features
+
+TODO
