@@ -124,7 +124,7 @@ Trump spoke significantly less than the other top candidates.
 
 #### Pronoun counts
 
-<img src="images/pronouns_table.png" alt="pronouns_table.png" width="500"/>
+<img src="images/pronouns_table.png" alt="pronouns_table.png" width="800"/>
 
 <img src="images/pronouns_graphs.png" alt="pronouns_graphs.png" width="500"/>
 
