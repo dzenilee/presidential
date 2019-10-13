@@ -127,3 +127,9 @@ Trump spoke significantly less than the other top candidates.
 <img src="images/pronouns_table" alt="pronouns_table" width="500"/>
 
 <img src="images/pronouns_graphs" alt="pronouns_graphs.png" width="500"/>
+
+
+## Next steps
+
+* IDF-weighted vector embeddings as a set of features to train a classification model 
+* Compute cosine similarity between the last year's candidates and this year's
