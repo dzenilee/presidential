@@ -1,4 +1,4 @@
-# `presidential`
+# 🇺🇸 Primary debates 2015-2016 
 
 ## Installation
 
@@ -35,9 +35,7 @@ Each data point is a candidate name-segment pair, where the candidate name is th
 CLINTON: Since he has been making all kinds of comments.
 
 # another data point
-CLINTON: I think it's fair to say, Assad has killed, by last count, about
-250,000 Syrians. The reason we are in the mess we're in, that ISIS has the
-territory it has, is because of Assad.
+CLINTON: I think it's fair to say, Assad has killed, by last count, about 250,000 Syrians. The reason we are in the mess we're in, that ISIS has the territory it has, is because of Assad.
 ```
 
 ## Feature selection 
@@ -104,20 +102,34 @@ f.get_n_opponent_mentions(text)  # 3
 Clinton, Sanders, Trump, Rubio, and Cruz, in that order, spent the most time
 talking in terms of total segment count (total number of paragraphs in the transcripts).
 
-![segment distribution](images/segment_distribution.png)
+<img src="images/segment_distribution.png" alt="segment distribution" width="500"/>
 
 There are other ways of representing length of speech though.
 
-![length of speech](images/length_of_speech.png)
+<img src="images/length_of_speech.png" alt="length of speech" width="800"/>
 
 After normalization:
 
-![length of speech normalized](images/length_of_speech_normalized_table.png)
+<img src="images/length_of_speech_normalized_table.png" alt="length of speech normalized" width="800"/>
 
-![length of speech normalized boxplot](images/length_of_speech_normalized_boxplot.png)
+<img src="images/length_of_speech_normalized_boxplot.png" alt="length of speech normalized boxplot" width="500"/>
 
 Trump spoke significantly less than the other top candidates.
 
 #### Lexical and syntactic features
 
-TODO
+<img src="images/lexical_syntactic_table.png" alt="lexical_syntactic" width="500"/>
+
+<img src="images/lexical_syntactic_graphs.png" alt="lexical_syntactic_graph" width="500"/>
+
+#### Pronoun counts
+
+<img src="images/pronouns_table" alt="pronouns_table" width="500"/>
+
+<img src="images/pronouns_graphs" alt="pronouns_graphs.png" width="500"/>
+
+
+## Next steps
+
+* IDF-weighted vector embeddings as a set of features to train a classification model 
+* Compute cosine similarity between the last year's candidates and this year's
