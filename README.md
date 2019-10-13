@@ -106,11 +106,11 @@ talking in terms of total segment count (total number of paragraphs in the trans
 
 There are other ways of representing length of speech though.
 
-<img src="images/length_of_speech.png" alt="length of speech" width="500"/>
+<img src="images/length_of_speech.png" alt="length of speech" width="800"/>
 
 After normalization:
 
-<img src="images/length_of_speech_normalized_table.png" alt="length of speech normalized" width="500"/>
+<img src="images/length_of_speech_normalized_table.png" alt="length of speech normalized" width="800"/>
 
 <img src="images/length_of_speech_normalized_boxplot.png" alt="length of speech normalized boxplot" width="500"/>
 
