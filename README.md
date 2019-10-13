@@ -102,22 +102,28 @@ f.get_n_opponent_mentions(text)  # 3
 Clinton, Sanders, Trump, Rubio, and Cruz, in that order, spent the most time
 talking in terms of total segment count (total number of paragraphs in the transcripts).
 
-<img src="images/segment_distribution.png" alt="segment distribution" width="200"/>
+<img src="images/segment_distribution.png" alt="segment distribution" width="500"/>
 
 There are other ways of representing length of speech though.
 
-![length of speech](images/length_of_speech.png)
+<img src="images/length_of_speech.png" alt="length of speech" width="500"/>
 
 After normalization:
 
-![length of speech normalized](images/length_of_speech_normalized_table.png)
+<img src="images/length_of_speech_normalized_table.png" alt="length of speech normalized" width="500"/>
 
-![length of speech normalized boxplot](images/length_of_speech_normalized_boxplot.png)
+<img src="images/length_of_speech_normalized_boxplot.png" alt="length of speech normalized boxplot" width="500"/>
 
 Trump spoke significantly less than the other top candidates.
 
 #### Lexical and syntactic features
 
-![lexical_syntactic](images/lexical_syntactic_table.png)
+<img src="images/lexical_syntactic_table.png" alt="lexical_syntactic" width="500"/>
 
-![lexical_syntactic_graph](images/lexical_syntactic_graphs.png)
+<img src="images/lexical_syntactic_graphs.png" alt="lexical_syntactic_graph" width="500"/>
+
+#### Pronoun counts
+
+<img src="images/pronouns_table" alt="pronouns_table" width="500"/>
+
+<img src="images/pronouns_graphs" alt="pronouns_graphs.png" width="500"/>
