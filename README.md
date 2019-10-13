@@ -21,7 +21,7 @@ American Presidency Project](https://www.presidency.ucsb.edu/documents/president
 
 A transcript excerpt: 
 
-![transcript excerpt](images/transcript_excerpt.png)
+<img src="images/transcript_excerpt.png" alt="transcript excerpt" width="500"/>
 
 ### Preprocessing steps
 1. Remove transcriptions of non-verbal utterances like `[laughter]`.
@@ -110,7 +110,7 @@ There are other ways of representing length of speech though.
 
 After normalization:
 
-<img src="images/length_of_speech_normalized_table.png" alt="length of speech normalized" width="800"/>
+<img src="images/length_of_speech_normalized_table.png" alt="length of speech normalized" width="900"/>
 
 <img src="images/length_of_speech_normalized_boxplot.png" alt="length of speech normalized boxplot" width="500"/>
 
@@ -118,13 +118,13 @@ Trump spoke significantly less than the other top candidates.
 
 #### Lexical and syntactic features
 
-<img src="images/lexical_syntactic_table.png" alt="lexical_syntactic" width="500"/>
+<img src="images/lexical_syntactic_table.png" alt="lexical_syntactic" width="800"/>
 
 <img src="images/lexical_syntactic_graphs.png" alt="lexical_syntactic_graph" width="500"/>
 
 #### Pronoun counts
 
-<img src="images/pronouns_table" alt="pronouns_table" width="500"/>
+<img src="images/pronouns_table" alt="pronouns_table.png" width="500"/>
 
 <img src="images/pronouns_graphs" alt="pronouns_graphs.png" width="500"/>
 
