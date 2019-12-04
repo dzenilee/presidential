@@ -14,15 +14,15 @@ if __name__ == "__main__":
     s = SegmentFeaturizer()
 
     df1 = df0
-    feature_dict = s.featurize(df1.segment)
-    for k, v in feature_dict.items():
-        print(k)
-        df1[k] = v
+    feature_dicts = s.featurize(df1.segment)
+    features_df = pd.DataFrame(feature_dicts)
+
+    df2 = pd.concat([df1, features_df], axis=1)  # axis=1 is important!
 
     filename = f"2019-2020/processed_transcripts_with_features_{date.today()}.csv"
-    df1.to_csv(DATA_DIR / filename, index=False)
-    n_rows = df1.shape[0]
-    n_features = df1.shape[1]
+    df2.to_csv(DATA_DIR / filename, index=False)
+    n_rows = df2.shape[0]
+    n_features = df2.shape[1]
     print(
         f"Wrote a dataframe containing {n_rows} rows and {n_features} "
         f"features to {filename}."
